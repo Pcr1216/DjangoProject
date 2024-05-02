@@ -1,0 +1,74 @@
+<style>
+  /* Style for the table */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    margin-bottom: 20px;
+  }
+
+  /* Style for table cells */
+  td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+  }
+
+  /* Style for checkboxes */
+  input[type="checkbox"] {
+    margin-right: 10px;
+  }
+
+  /* Style for submit buttons */
+  input[type="submit"] {
+    padding: 8px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  /* Hover effect for submit buttons */
+  input[type="submit"]:hover {
+    background-color: #45a049;
+  }
+
+  /* Style for images */
+  .product-image {
+    width: 200px; /* Adjust the width of the images */
+    height: auto; /* Maintain aspect ratio */
+    margin-right: 10px;
+  }
+</style>
+
+<form action="addCart" method="post">
+
+  {% csrf_token %}
+
+  <table>
+    <tr>
+      <!-- Image for Shoes -->
+      <td><input type="checkbox" name="product" value="shoes" /> <img src="../static/shoes.jpg" alt="Shoes" class="product-image" />Shoes</td>
+
+    </tr>
+    <tr>
+      <!-- Image for Mobile -->
+      <td><input type="checkbox" name="product" value="mobile" /> <img src="../static/mobile.jpg" alt="Mobile" class="product-image" />Mobile</td>
+
+    </tr>
+    <tr>
+      <!-- Image for Laptop -->
+      <td><input type="checkbox" name="product" value="laptop" /> <img src="../static/laptop.jpg" alt="Laptop" class="product-image" />Laptop</td>
+
+    </tr>
+    <tr>
+      <!-- Image for Speaker -->
+      <td><input type="checkbox" name="product" value="speaker" /> <img src="../static/speaker.jpg" alt="Speaker" class="product-image" />Speaker</td>
+    </tr>
+
+  </table>
+  <input type="submit" value="Add to Cart" />
+
+</form>

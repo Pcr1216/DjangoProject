@@ -1,0 +1,66 @@
+<style>
+  /* Style for the entire body */
+  body {
+    background-image: url("../static/img.jpg");
+    background-size: cover;
+    background-position: center;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif; /* Using a clean, modern font */
+  }
+
+  /* Style for the navigation bar */
+  .navbar {
+    background-color: #3f5ea8;
+    overflow: hidden;
+    padding: 16px 0; /* Reduced horizontal padding for tighter corner grouping */
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); /* Subtle shadow for depth */
+  }
+
+  /* Right-aligned container for navigation links */
+  .nav-right {
+    float: right; /* Ensures that the container is on the right */
+    padding-right: 10%; /* Right padding for alignment with page content */
+  }
+
+  /* Style for the navigation links */
+  .navbar a {
+    display: inline-block; /* Inline-block for better control than float */
+    color: white;
+    text-align: center;
+    padding: 14px 20px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+    font-size: 16px; /* Standard font size */
+  }
+
+  /* Increased font size for specific link */
+  .navbar a.shop-large {
+    font-size: 20px; /* Larger font size for better visibility */
+  }
+
+  /* Hover effect for the navigation links */
+  .navbar a:hover {
+    background-color: #ddd;
+    color: #303038;
+  }
+
+  /* Ensure full viewport height */
+  .content {
+    min-height: 90vh;
+    padding: 20px;
+    color: white; /* Ensuring text color contrasts well with a likely dark background image */
+  }
+</style>
+
+<div class="navbar">
+  <div class="nav-right">
+    <a href="shopping" class="shop-large">Shop now</a>  <!-- Added class for increased font size -->
+    <a href="viewCart">View cart</a>
+    <a href="profile">My Profile</a>
+  </div>
+</div>
+
+<div class="content">
+  <!-- Content of your site goes here -->
+</div>
