@@ -74,14 +74,22 @@
         <thead>
             <tr>
                 <th>Product</th>
+                <th>Quantity</th>
             </tr>
         </thead>
         <tbody>
-            {% for item in itemlist %}
-            <tr>
-                <td>{{ item }}</td>
-            </tr>
-            {% endfor %}
+            {% if productlist %}
+                {% for product in productlist %}
+                    <tr>
+                        <td>{{ product.prodname }}</td>
+                        <td>{{ product.quantity }}</td>
+                    </tr>
+                {% endfor %}
+            {% else %}
+                <tr>
+                    <td colspan="2">No products in the cart</td>
+                </tr>
+            {% endif %}
         </tbody>
     </table>
 

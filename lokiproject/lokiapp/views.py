@@ -7,10 +7,11 @@ from django.shortcuts import render, redirect
 from .forms import RegistrationForm
 import mysql.connector as m
 from django.contrib.auth.decorators import login_required
+from .models import Product
 
 # database connectivity
 
-mydatabase = m.connect(host="localhost", user="root", password="Bbshark@1234", database="pythondb1")
+mydatabase = m.connect(host="localhost", user="root", password="mysql@123", database="pythondb1")
 query = "insert into product(pname,price,quantity) values(%s,%s,%s)"  # must be "s"
 query2="select * from product"
 cursor = mydatabase.cursor()
@@ -55,6 +56,7 @@ def custom_login(request):
         username = request.POST.get('username')
         password = request.POST.get('password')
         user = authenticate(request, username=username, password=password)
+        print(user.get_username)
         if user is not None:
             login(request, user)
             return redirect('/welcome')  # Redirect to the home page after successful login
@@ -78,25 +80,32 @@ def shop(request):
     return render(request, 'shop.html')
 
 def addCart(request):
-    items = request.POST.getlist('product')
-    if request.session.get("prodlist"):
-        mylist = request.session.get("prodlist")
-        mylist.extend(items)
-        request.session['prodlist'] = mylist
+    if request.method == 'POST':
+        products = request.POST.getlist('product')
+        quantities = request.POST.getlist('quantity')  # Get quantities submitted in the form
+        for product, quantity in zip(products, quantities):
+            # Create a new Product instance with the submitted quantity and save it to the database
+            product_obj = Product(prodname=product, quantity=quantity)
+            product_obj.save()
+        return render(request, 'home_s.html')  # Redirect to the home page after adding products
     else:
-        request.session['prodlist'] = items
-    return render(request, 'home_s.html')
+        return render(request, 'home_s.html')
 
 def viewCart(request):
-    if request.session.get("prodlist"):
-        mylist = request.session.get("prodlist")
-        return render(request, 'viewCart.html', {'itemlist': mylist})
+    print("hello")
+    if request.method == 'GET':
+        # Query only the prodname and quantity fields
+        prod_list = Product.objects.values('prodname', 'quantity')
+        print(prod_list)
+        context = {'productlist': prod_list}  # Correct the key to match the template
+        print(context)
+        return render(request, 'viewCart.html', context=context)  # Correct template name
     else:
         return render(request, 'Empty.html')
 
 def payment(request):
     # as if we receive payment here
-    del request.session['prodlist']  # to kill the session
+    Product.objects.all().delete()
     return render(request, 'paymentc.html')
 
 def welcome(request):
